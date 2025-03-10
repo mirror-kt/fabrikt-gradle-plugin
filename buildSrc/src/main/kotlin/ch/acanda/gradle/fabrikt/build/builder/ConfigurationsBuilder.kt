@@ -62,14 +62,16 @@ private fun buildConfigurations(
         )
     }
     config.properties.map { (name, property) ->
-        spec.addProperty(buildProperty(name, property, schema, CLASS_NAME_SUFFIX) {
-            if (!property.isNested(schema.configurations)) {
-                addAnnotation(AnnotationSpec.builder(property.dataflowAnnotation).useSiteTarget(GET).build())
+        spec.addProperty(
+            buildProperty(name, property, schema, CLASS_NAME_SUFFIX) {
+                if (!property.isNested(schema.configurations)) {
+                    addAnnotation(AnnotationSpec.builder(property.dataflowAnnotation).useSiteTarget(GET).build())
+                }
+                if (property.isOptional()) {
+                    addAnnotation(AnnotationSpec.builder(Optional::class).useSiteTarget(GET).build())
+                }
             }
-            if (property.isOptional()) {
-                addAnnotation(AnnotationSpec.builder(Optional::class).useSiteTarget(GET).build())
-            }
-        })
+        )
         if (property.isOption(schema.options)) {
             spec.addProperties(
                 property.buildOptionProperties(schema.options) {

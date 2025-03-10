@@ -1,3 +1,5 @@
+@file:Suppress("TooManyFunctions")
+
 package ch.acanda.gradle.fabrikt.build.builder
 
 import ch.acanda.gradle.fabrikt.build.GeneratePluginClassesTask

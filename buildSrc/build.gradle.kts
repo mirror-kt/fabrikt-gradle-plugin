@@ -13,7 +13,11 @@ repositories {
 }
 
 dependencies {
-    implementation(libs.fabrikt)
+    implementation(libs.fabrikt) {
+        version {
+            branch = "feature/spring-http-interface"
+        }
+    }
     implementation(libs.kotlinpoet)
     implementation(libs.bundles.jackson)
     detektPlugins(libs.detekt.formatting)

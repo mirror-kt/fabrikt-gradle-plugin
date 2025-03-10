@@ -80,7 +80,6 @@ private fun enumConstantSpec(enumTypeName: String, enumConstantName: String?) =
 private val nullSpec =
     TypeSpec.anonymousClassBuilder().addSuperclassConstructorParameter("null").build()
 
-
 private fun enumValueSpec(enumTypeName: String, enumConstantName: String): TypeSpec {
     val enumType = Class.forName(enumTypeName)
     require(enumType.isEnum) { "Type ${enumType.kotlin.qualifiedName} is not an enum class." }
@@ -93,5 +92,5 @@ private fun enumValueSpec(enumTypeName: String, enumConstantName: String): TypeS
 
 @Suppress("UNCHECKED_CAST")
 private operator fun Class<Enum<*>>.get(name: String): String =
-    this.enumConstants.firstOrNull() { it.name == name }?.name
+    this.enumConstants.firstOrNull { it.name == name }?.name
         ?: throw EnumConstantNotPresentException(this, name)

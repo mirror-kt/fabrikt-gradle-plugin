@@ -63,7 +63,6 @@ private fun buildInitializer(name: String, config: ConfigurationDefinition, sche
         .addCode(buildInitializerCodeBlock(config, schema))
         .build()
 
-
 private fun buildInitializerCodeBlock(config: ConfigurationDefinition, schema: ConfigurationSchema): CodeBlock {
     val block = CodeBlock.builder()
     block.beginControlFlow("return { source, defaults ->")
@@ -72,7 +71,9 @@ private fun buildInitializerCodeBlock(config: ConfigurationDefinition, schema: C
         when {
             property.isNested(schema.configurations) ->
                 block.addStatement(
-                    "initialize%1NConfiguration().invoke(%2N, source.%2N, defaults.%2N)", property.type, name
+                    "initialize%1NConfiguration().invoke(%2N, source.%2N, defaults.%2N)",
+                    property.type,
+                    name
                 )
 
             !property.includeInDefaults -> block.addStatement("%1N.set(source.%1N)", name)
@@ -95,7 +96,6 @@ private fun assignPropertyFunction(): FunSpec =
         .addStatement("if (value.isPresent) { set(value.get()) } else { set(defaultValue.orNull) }")
         .build()
 
-
 private fun assignConfigurableFileCollectionFunction(): FunSpec =
     FunSpec.builder("assign")
         .addModifiers(KModifier.PRIVATE)
@@ -104,4 +104,3 @@ private fun assignConfigurableFileCollectionFunction(): FunSpec =
         .addParameter("defaultValue", ConfigurableFileCollection::class)
         .addStatement("if (!value.isEmpty) { setFrom(value) } else { setFrom(defaultValue) }")
         .build()
-
