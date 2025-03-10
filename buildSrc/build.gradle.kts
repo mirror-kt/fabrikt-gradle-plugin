@@ -10,14 +10,11 @@ plugins {
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
-    implementation(libs.fabrikt) {
-        version {
-            branch = "feature/spring-http-interface"
-        }
-    }
+    implementation(libs.fabrikt)
     implementation(libs.kotlinpoet)
     implementation(libs.bundles.jackson)
     detektPlugins(libs.detekt.formatting)

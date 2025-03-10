@@ -34,14 +34,11 @@ gradlePlugin {
 
 repositories {
     mavenCentral()
+    maven("https://jitpack.io")
 }
 
 dependencies {
-    implementation(libs.fabrikt) {
-        version {
-            branch = "feature/spring-http-interface"
-        }
-    }
+    implementation(libs.fabrikt)
     implementation(libs.bundles.jackson)
     testImplementation(kotlin("test"))
     detektPlugins(libs.detekt.formatting)
