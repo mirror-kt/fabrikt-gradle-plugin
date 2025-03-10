@@ -122,4 +122,7 @@ tasks {
         }
     }
 
+    withType<Sign>().configureEach {
+        onlyIf { System.getenv("JITPACK") == null }
+    }
 }
